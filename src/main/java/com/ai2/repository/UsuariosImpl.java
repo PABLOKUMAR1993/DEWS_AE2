@@ -28,8 +28,8 @@ public class UsuariosImpl implements IntUsuarios {
 	
 	public void crearUsuarios() {
 		
-		usuarios.add( new Usuarios ( 01, "UserName01", "abcd", "email1@email.com", "Pavlo", "Calle Falsa 123", 1, new Date() ) );
-		usuarios.add( new Usuarios ( 02, "UserName02", "dcba", "email2@email.com", "Tomas", "Calle Verdadera 321", 1, new Date() ) );
+		usuarios.add( new Usuarios ( 1, "UserName01", "abcd", "email1@email.com", "Pavlo", "Calle Falsa 123", 1, new Date() ) );
+		usuarios.add( new Usuarios ( 2, "UserName02", "dcba", "email2@email.com", "Tomas", "Calle Verdadera 321", 1, new Date() ) );
 		
 	}
 	
@@ -60,6 +60,62 @@ public class UsuariosImpl implements IntUsuarios {
 		return usuarios;
 		
 	}
+
+	@Override
+	public boolean crearUsuario(Usuarios usuario) {
+		
+		// Si el usuario no existe, lo añado a la lista.
+		
+		if ( usuarios.contains( usuario ) ) {
+			return false;
+		} else {
+			usuarios.add( usuario );
+			return true;
+		}
+		
+	}
+	
+	@Override
+	public boolean comprobarUserName(String userName) {
+		
+		// Si la lista contiene a un usuario con el userName, devuelvo true.
+		
+		boolean encontrado = false;
+		
+		for ( Usuarios usuario : usuarios ) {
+			if ( userName.equals(usuario.getUserName()) ) encontrado = true;
+			break;
+		}
+		
+		return encontrado;
+		
+	}
+
+	@Override
+	public boolean comprobarPassword(String password) {
+
+		// Si la lista contiene a un usuario con el password, devuelvo true.
+		
+		boolean encontrado = false;
+		
+		for ( Usuarios usuario : usuarios ) {
+			if ( password.equals(usuario.getPassword()) ) encontrado = true;
+			break;
+		}
+		
+		return encontrado;
+		
+	}
+	
+	@Override
+	public int asignarID() {
+		
+		// Devulevo la lóngitud del array +1.
+		
+		return ( usuarios.size() + 1 );
+		
+	}
+
 
 	
 }
