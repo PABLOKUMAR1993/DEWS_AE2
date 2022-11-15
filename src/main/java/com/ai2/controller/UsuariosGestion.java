@@ -68,6 +68,16 @@ public class UsuariosGestion {
 		return "index";
 		
 	}
+	
+	@GetMapping("/cerrar")
+	public String cerrarSesion(HttpSession sesion) {
+		
+		System.out.println(sesion.getAttribute("userNameMostrar"));
+		sesion.removeAttribute( "userNameMostrar" );
+		System.out.println(sesion.getAttribute("userNameMostrar"));
+		return "index";
+		
+	}
 
 	
 	

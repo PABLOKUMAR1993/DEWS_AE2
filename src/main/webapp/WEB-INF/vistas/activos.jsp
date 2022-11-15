@@ -3,13 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="ISO-8859-1">
-	<title>Inicio</title>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
 </head>
 <body style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100vh">
 
-	<c:if test="${ sessionScope.userNameMostrar != null }">
-	
 	<div style="height: 50vh; width: 75vw">
 	
 		<h1>AE-2 Controlar Rol clientes y sus acciones</h1>
@@ -28,34 +26,33 @@
 			<p style="margin-left: 80px">Nombre Usuario: ${sessionScope.userNameMostrar}</p>
 		</nav>
 		
-	</div>
-
-	</c:if>
-	
-	<c:if test="${ sessionScope.userNameMostrar == null }">
-	
-		<div style="height: 50vh; width: 75vw">
-	
-		<form method="get" action="/login/identificacion">
-			
-			<label for="userName">
-				Nombre de Usario:
-				<input type="text" name="userName" placeholder="Nombre de Usario"/>
-			</label>
-			<label for="password">
-				Contraseña:
-				<input type="password" name="password" placeholder="Contraseña"/>
-			</label>
-			<button>Iniciar Sesión</button>
-			
-		</form>
+		<table>
 		
-		<p>mensaje login:  ${mensajeLogin}</p>
-		<p>¿No tienes cuenta? <a href="#">Create una aquí</a></p>
+			<tr>
+			
+				<th>NOMBRE</th>
+				<th>AFORO</th>
+				<th>FECHA INICIO</th>
+				<th>OPCIONES</th>
+			
+			</tr>
+			
+			
+			<c:forEach var="evento" items="${ listaEventos }">
+				
+				<tr>
+					<td>${ evento.nombre }</td>
+					<td>${ evento.aforoMaximo }</td>
+					<td>${ evento.fechaInicio }</td>
+					<td><a href="/evento/id/${ evento.idEvento }">Detalle</a></td>
+				</tr>
+				
+			</c:forEach>
+			
+		
+		</table>
 		
 	</div>
 	
-	</c:if>
-
 </body>
 </html>
