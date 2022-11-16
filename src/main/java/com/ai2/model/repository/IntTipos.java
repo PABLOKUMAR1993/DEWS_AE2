@@ -1,6 +1,7 @@
-package com.ai2.repository;
+package com.ai2.model.repository;
 import java.util.List;
-import com.ai2.beans.Tipos;
+
+import com.ai2.model.beans.Tipos;
 
 
 public interface IntTipos {

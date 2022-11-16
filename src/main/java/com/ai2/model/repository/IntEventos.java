@@ -1,6 +1,7 @@
-package com.ai2.repository;
+package com.ai2.model.repository;
 import java.util.List;
-import com.ai2.beans.Eventos;
+
+import com.ai2.model.beans.Eventos;
 
 
 public interface IntEventos {

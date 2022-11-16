@@ -1,4 +1,4 @@
-package com.ai2.beans;
+package com.ai2.model.beans;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;

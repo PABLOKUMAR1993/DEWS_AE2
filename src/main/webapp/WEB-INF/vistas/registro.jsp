@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +10,14 @@
 
 	<div style="height: 50vh; width: 75vw">
 	
+		<c:if test="${ sessionScope.userLogged != null }">
+		
+			<p>${sessionScope.userLogged.userName}, ya estás loggeado, <a href="/">volver a inicio</a></p>
+		
+		</c:if>
+	
+		<c:if test="${ sessionScope.userLogged == null }">
+		
 		<form method="post" action="/registro/usuarioNuevo" style=" display: flex; flex-direction: column; align-items: center; justify-content: center;">
 			
 			<label for="userName"> Nombre de Usario: </label>
@@ -23,12 +31,14 @@
 			<label for="direccion"> Dirección: </label>
 			<input type="text" name="direccion" placeholder="Dirección"/>
 
-			<button style="width: 250px;">Iniciar Sesión</button>
+			<button style="width: 250px;">Registrarse</button>
 			
 		</form>
 		
 		<p>mensaje login:  ${mensajeLogin}</p>
 		<p>¿No tienes cuenta? <a href="#">Create una aquí</a></p>
+		
+		</c:if>
 		
 	</div>
 

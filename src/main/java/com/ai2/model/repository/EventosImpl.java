@@ -1,9 +1,10 @@
-package com.ai2.repository;
+package com.ai2.model.repository;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.springframework.stereotype.Repository;
-import com.ai2.beans.Eventos;
+
+import com.ai2.model.beans.Eventos;
 
 
 @Repository

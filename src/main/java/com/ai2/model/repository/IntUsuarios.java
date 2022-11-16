@@ -1,12 +1,14 @@
-package com.ai2.repository;
+package com.ai2.model.repository;
 import java.util.List;
-import com.ai2.beans.Usuarios;
+
+import com.ai2.model.beans.Usuarios;
 
 
 public interface IntUsuarios {
 
 	
 	Usuarios buscarUno(int idUsuario);
+	Usuarios buscarUno(String userName);
 	List<Usuarios> buscarTodos();
 	boolean crearUsuario(Usuarios usuarios);
 	boolean comprobarUserName(String userName);

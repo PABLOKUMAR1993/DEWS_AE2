@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,23 +11,40 @@
 
 	<div style="height: 50vh; width: 75vw">
 	
-		<h1>AE-2 Controlar Rol clientes y sus acciones</h1>
+		<h1>Mis Reservas</h1>
 		
-		<nav style="display: flex">
-			<p style="margin-right: 40px">LOGO</p>
-			<li style="display: flex">
-				<ul><a href="#">Eventos Destacados</a></ul>
-				<ul><a href="#">Eventos Activos</a></ul>
-				<ul><a href="#">Tipo de Evento</a></ul>
-				<ul><a href="/temporal">Mis Reservas</a></ul>
-				<ul><a href="/login">Login</a></ul>
-				<ul><a href="#">Registro</a></ul>
-				<ul><a href="#">Salir</a></ul>
-			</li>
-			<p style="margin-left: 80px">Nombre Usuario</p>
-		</nav>
+		<p>${ mensaje }</p>
 		
-		<h6>Usuario: ${sessionScope.userNameMostrar}</h6>
+		<c:if test="${ listadoReservas != [] }">
+			
+			<table>
+			<tr>
+				<th>ID RESERVA</th>
+				<th>PRECIO EVENTO</th>
+				<th>OBSERVACIONES</th>
+				<th>CANTIDAD RESERVADA</th>
+			</tr>
+			<c:forEach var="reserva" items="${ listadoReservas }">
+				
+				<tr>
+					<td>${ reserva.idReserva }</td>
+					<td>${ reserva.precioVeta }</td>
+					<td>${ reserva.observaciones }</td>
+					<td>${ reserva.cantidad }</td>
+				</tr>
+				
+			</c:forEach>
+			</table>
+			
+			<p><a href="/">volver a inicio</a></p>
+			
+		</c:if>
+		
+		<c:if test="${ listadoReservas == [] }">
+		
+			<p>No has realizado todavía ninguna reserva, <a href="/">volver a inicio</a></p>
+		
+		</c:if>
 		
 	</div>
 

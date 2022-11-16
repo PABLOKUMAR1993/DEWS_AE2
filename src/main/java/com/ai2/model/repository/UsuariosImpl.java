@@ -1,9 +1,10 @@
-package com.ai2.repository;
+package com.ai2.model.repository;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.springframework.stereotype.Repository;
-import com.ai2.beans.Usuarios;
+
+import com.ai2.model.beans.Usuarios;
 
 
 @Repository
@@ -53,6 +54,29 @@ public class UsuariosImpl implements IntUsuarios {
 		}
 		
 	}
+	
+	@Override
+	public Usuarios buscarUno(String userName) {
+		
+		Usuarios usuarioObtenido = new Usuarios();
+		int i = 0;
+		
+		for ( Usuarios usuario : usuarios ) {
+			
+			if ( userName.equals( usuario.getUserName() ) ) {
+				
+				usuarioObtenido = usuarios.get( i );
+				i++;
+				
+			}
+			break;
+			
+		}
+		
+		return usuarioObtenido;
+		
+	}
+
 
 	@Override
 	public List<Usuarios> buscarTodos() {
@@ -115,7 +139,6 @@ public class UsuariosImpl implements IntUsuarios {
 		return ( usuarios.size() + 1 );
 		
 	}
-
 
 	
 }

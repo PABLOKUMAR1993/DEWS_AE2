@@ -7,8 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.ai2.beans.Usuarios;
-import com.ai2.repository.IntUsuarios;
+
+import com.ai2.model.beans.Usuarios;
+import com.ai2.model.repository.IntUsuarios;
 
 
 @Controller
@@ -33,13 +34,16 @@ public class UsuariosGestion {
 	}
 	
 	@GetMapping("/login/identificacion")
-	public String identificacion(HttpSession sesion, Model model, @RequestParam("userName") String userName, @RequestParam("password") String password) {
+	public String identificacion(HttpSession sesion, Model model, @RequestParam( "userName" ) String userName, @RequestParam( "password" ) String password) {
 		
-		if ( usuario.comprobarUserName(userName) && usuario.comprobarPassword(password) ) {
-			sesion.setAttribute("userNameMostrar", userName);
+		Usuarios usuarioSesion = usuario.buscarUno(userName);
+		
+		if ( usuario.comprobarUserName( userName ) && usuario.comprobarPassword( password ) ) {
+			sesion.setAttribute( "userLogged", usuarioSesion );
+			sesion.setAttribute( "userLoggedId", usuarioSesion.getIdUsuario() );
 			return "index";
 		} else {
-			model.addAttribute("mensajeLogin", "Usuario o Contraseña Incorrectos");
+			model.addAttribute( "mensajeLogin", "Usuario o Contraseña Incorrectos" );
 			return "login";
 		}
 		
@@ -55,6 +59,8 @@ public class UsuariosGestion {
 	public String altaUsuario( @RequestParam( "userName" ) String userName, @RequestParam( "password" ) String password, @RequestParam( "email" ) String email,
 							   @RequestParam( "nombre" ) String nombre, @RequestParam( "direccion" ) String direccion, HttpSession sesion) {
 		
+		Usuarios usuarioSesion = usuario.buscarUno(userName);
+		
 		// Creo un usuario con los datos pasados.
 		Usuarios usuarioNuevo = new Usuarios( usuario.asignarID(), userName, password, email, nombre, direccion, 1, new Date() );
 		
@@ -62,7 +68,7 @@ public class UsuariosGestion {
 		usuario.crearUsuario(usuarioNuevo);
 		
 		// Creo la sesión.
-		sesion.setAttribute("userNameMostrar", userName);
+		sesion.setAttribute( "userLogged", usuarioSesion );
 		
 		 
 		return "index";
@@ -71,10 +77,9 @@ public class UsuariosGestion {
 	
 	@GetMapping("/cerrar")
 	public String cerrarSesion(HttpSession sesion) {
-		
-		System.out.println(sesion.getAttribute("userNameMostrar"));
-		sesion.removeAttribute( "userNameMostrar" );
-		System.out.println(sesion.getAttribute("userNameMostrar"));
+
+		sesion.removeAttribute( "userLogged" );
+		sesion.removeAttribute( "userLoggedId" );
 		return "index";
 		
 	}

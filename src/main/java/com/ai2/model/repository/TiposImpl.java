@@ -1,8 +1,9 @@
-package com.ai2.repository;
+package com.ai2.model.repository;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Repository;
-import com.ai2.beans.Tipos;
+
+import com.ai2.model.beans.Tipos;
 
 
 @Repository
