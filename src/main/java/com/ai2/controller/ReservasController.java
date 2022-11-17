@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.ai2.model.beans.Reservas;
 import com.ai2.model.repository.IntEventos;
 import com.ai2.model.repository.IntReservas;
@@ -33,21 +35,31 @@ public class ReservasController {
 	@GetMapping("/reservas")
 	public String verReservas(Model model) {
 		
+		// Le paso una lista de TODAS las reservas.
+		
 		model.addAttribute("listadoReservas", reserva.buscarTodos());
+		
 		return "misReservas";
+		
 	}
 	
 	@PostMapping("/reservar/{idEvento}")
 	public String reservar( @PathVariable( "idEvento" ) int idEvento, @RequestParam( "cantidad" ) int cantidad,
-			@RequestParam( "observaciones" ) String observaciones, HttpSession sesion, Model model ) {
+			@RequestParam( "observaciones" ) String observaciones, HttpSession sesion, RedirectAttributes redir ) {
+		
+		// Creo una nueva reserva.
 		
 		Reservas reservaNueva = new Reservas ( reserva.obtenerId(), evento.buscarUno(idEvento), usuario.buscarUno( (int) sesion.getAttribute("userLoggedId") ),
 				evento.buscarUno(idEvento).getPrecio(), observaciones, cantidad );
 		
+		// Añado la reserva a la lista de reservas.
+		
 		boolean reservaCreada = reserva.crearReserva( reservaNueva );
 
-		if ( reservaCreada )model.addAttribute( "mensaje", "Evento reservador con éxito" );
-		else model.addAttribute( "mensaje", "Ha habido un error al procesar tu reserva" );	
+		// Según si la reserva se ha creado o no, paso un mensaje u otro mediante redirect a reservas.jsp.
+		
+		if ( reservaCreada )redir.addFlashAttribute("mensajeReserva", "Evento reservador con éxito" );
+		else redir.addFlashAttribute( "mensajeReserva", "Ha habido un error al procesar tu reserva" );	
 		
 		return "redirect:/reservas";
 	

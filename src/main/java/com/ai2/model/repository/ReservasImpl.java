@@ -44,17 +44,15 @@ public class ReservasImpl implements IntReservas {
 	
 	@Override
 	public Reservas buscarUno(int idReserva) {
-
-		// Explicación del funcionamiento de este método en la clase TiposImpl.
 		
-		Reservas aux = new Reservas();
-		aux.setIdReserva(idReserva);
-		int index = reservas.indexOf( aux );
+		Reservas aux = new Reservas(); // Creo una variable de la clase llamando al contructor vacio.
+		aux.setIdReserva(idReserva); // Al objeto "aux" le asigno un id, que es el mismo que recibo cómo argumento.
+		int index = reservas.indexOf( aux ); // Busco en la lista un objeto con mismo id.
 		
-		if ( index == -1 ) {
+		if ( index == -1 ) { // Si devuelve -1 significa que no ha entrado uno igual.
 			return null;
 		} else {
-			return reservas.get( index );
+			return reservas.get( index ); // Devuelvo el objeto almacenado en el indice indicado.
 		}
 		
 	}
@@ -62,12 +60,14 @@ public class ReservasImpl implements IntReservas {
 	@Override
 	public List<Reservas> buscarTodos() {
 
-		return reservas;
+		return reservas; // Devuelvo la lista completa.
 		
 	}
 
 	@Override
 	public boolean crearReserva(Reservas reserva) {
+		
+		// Si la reserva no existe todavía, la añado a la lista y devuelvo true.
 		
 		if ( reservas.contains( reserva ) ) { 
 			return false;
@@ -81,6 +81,7 @@ public class ReservasImpl implements IntReservas {
 	@Override
 	public int totalReservas() {
 		
+		// Devuelvo el total de elementos en la lista, para saber cuantas reservas se han hecho.
 		return reservas.size();
 		
 	}
@@ -88,6 +89,7 @@ public class ReservasImpl implements IntReservas {
 	@Override
 	public int obtenerId() {
 		
+		// Para que no se repita el id le asigno el total de elementos + 1.
 		return ( reservas.size() + 1 );
 		
 	}

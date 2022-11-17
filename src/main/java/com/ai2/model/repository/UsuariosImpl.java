@@ -41,16 +41,14 @@ public class UsuariosImpl implements IntUsuarios {
 	@Override
 	public Usuarios buscarUno(int idUsuario) {
 		
-		// Explicación del funcionamiento de este método en la clase TiposImpl.
+		Usuarios aux = new Usuarios(); // Creo una variable de la clase llamando al contructor vacio.
+		aux.setIdUsuario(idUsuario); // Al objeto "aux" le asigno un id, que es el mismo que recibo cómo argumento.
+		int index = usuarios.indexOf( aux ); // Busco en la lista un objeto con mismo id.
 		
-		Usuarios aux = new Usuarios();
-		aux.setIdUsuario(idUsuario);
-		int index = usuarios.indexOf( aux );
-		
-		if ( index == -1 ) {
+		if ( index == -1 ) { // Si devuelve -1 significa que no ha entrado uno igual.
 			return null;
 		} else {
-			return usuarios.get( index );
+			return usuarios.get( index ); // Devuelvo el objeto almacenado en el indice indicado.
 		}
 		
 	}
@@ -58,19 +56,19 @@ public class UsuariosImpl implements IntUsuarios {
 	@Override
 	public Usuarios buscarUno(String userName) {
 		
+		// Aquí busco por userName
+		// Si el userName pasado concuerda en el equals con algún userName almacenado,
+		// me guardo el indice y devuelvo el usuario que concuerta.
+		
 		Usuarios usuarioObtenido = new Usuarios();
 		int i = 0;
 		
 		for ( Usuarios usuario : usuarios ) {
-			
 			if ( userName.equals( usuario.getUserName() ) ) {
-				
 				usuarioObtenido = usuarios.get( i );
 				i++;
-				
 			}
 			break;
-			
 		}
 		
 		return usuarioObtenido;
@@ -81,14 +79,14 @@ public class UsuariosImpl implements IntUsuarios {
 	@Override
 	public List<Usuarios> buscarTodos() {
 		
-		return usuarios;
+		return usuarios; // Devuelvo la lista completa.
 		
 	}
 
 	@Override
 	public boolean crearUsuario(Usuarios usuario) {
 		
-		// Si el usuario no existe, lo añado a la lista.
+		// Si el usuario no existe, lo añado a la lista y devuelvo true.
 		
 		if ( usuarios.contains( usuario ) ) {
 			return false;

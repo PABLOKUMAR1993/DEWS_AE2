@@ -32,13 +32,13 @@ public class EventosImpl implements IntEventos {
 		IntTipos tipos = new TiposImpl(); // Necesito esta variable para acceder a los tipos de evento.
 		
 		eventos.add( new Eventos ( 01, "Boda de Thor y Freyja", "Se van a casar los gatos Thor y Freyja", new Date(), 12,
-								  "En casa de Thor", "activo", 'n', 300, 50, 150, tipos.buscarUno( 04 ) ) );
+								  "En casa de Thor", "activo", "n", 300, 50, 150, tipos.buscarUno( 04 ) ) );
 		eventos.add( new Eventos ( 02, "Cumpleaños de Thor y Freyja", "Se van a celebrar el cumple de los gatos Thor y Freyja", new Date(), 9,
-								  "En casa de Freyja", "activo", 's', 100, 10, 50, tipos.buscarUno( 03 ) ) );
+								  "En casa de Freyja", "activo", "s", 100, 10, 50, tipos.buscarUno( 03 ) ) );
 		eventos.add( new Eventos ( 03, "Despedida de Thor y Freyja", "Se van a celebrar la despedida de la boda de los gatos Thor y Freyja", new Date(), 16,
-								  "En casa de Freyja", "activo", 's', 400, 40, 50, tipos.buscarUno( 02 ) ) );
+								  "En casa de Freyja", "activo", "s", 400, 40, 50, tipos.buscarUno( 02 ) ) );
 		eventos.add( new Eventos ( 04, "Concierto de la Boda de los gatos Thor y Freyja", "Se van a celebrar un concierto para Thor y Freyja", new Date(), 12,
-								  "En el patio de Thor", "inactivo", 'n', 500, 25, 35, tipos.buscarUno( 01 ) ) );
+								  "En el patio de Thor", "inactivo", "n", 500, 25, 35, tipos.buscarUno( 01 ) ) );
 		
 	}
 	
@@ -49,16 +49,14 @@ public class EventosImpl implements IntEventos {
 	@Override
 	public Eventos buscarUno( int idEvento ) {
 		
-		// Explicación del funcionamiento de este método en la clase TiposImpl.
+		Eventos aux = new Eventos(); // Creo una variable de la clase llamando al contructor vacio.
+		aux.setIdEvento(idEvento); // Al objeto "aux" le asigno un id, que es el mismo que recibo cómo argumento.
+		int index = eventos.indexOf( aux ); // Busco en la lista un objeto con mismo id.
 		
-		Eventos aux = new Eventos();
-		aux.setIdEvento(idEvento);
-		int index = eventos.indexOf( aux );
-		
-		if ( index == -1 ) {
+		if ( index == -1 ) { // Si devuelve -1 significa que no ha entrado uno igual.
 			return null;
 		} else {
-			return eventos.get( index );
+			return eventos.get( index ); // Devuelvo el objeto almacenado en el indice indicado.
 		}
 		
 	}
@@ -66,7 +64,7 @@ public class EventosImpl implements IntEventos {
 	@Override
 	public List<Eventos> buscarTodos() {
 		
-		return eventos;
+		return eventos; // Devuelvo la lista de eventos.
 		
 	}
 

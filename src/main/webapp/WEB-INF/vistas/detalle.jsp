@@ -7,44 +7,62 @@
 <link rel="stylesheet" type="text/css" href="/resources/style.css">
 <title>Insert title here</title>
 </head>
-<body style="display: flex; flex-direction: column;">
+<body>
+
+
+	<!-- Muestro en una tabla el evento seleccionado por su ID -->
 
 	<table>
-	
 		<tr>
-			<th style="border: 2px solid black;">NOMBRE</th>
-			<th style="border: 2px solid black;">DESCRIPCIÓN</th>
-			<th style="border: 2px solid black;">DIRECCIÓN</th>
-			<th style="border: 2px solid black;">FECHA INICIO</th>
-			<th style="border: 2px solid black;">DURACIÓN</th>
-			<th style="border: 2px solid black;">AFOTO MÁXIMO</th>
-			<th style="border: 2px solid black;">ASISTENCIA MÍNIMA</th>
+			<th>NOMBRE</th>
+			<th>DESCRIPCIÓN</th>
+			<th>DIRECCIÓN</th>
+			<th>FECHA INICIO</th>
+			<th>DURACIÓN</th>
+			<th>AFOTO MÁXIMO</th>
+			<th>ASISTENCIA MÍNIMA</th>
 		</tr>
-		
 		<tr>
-			<td style="border: 2px solid black;">${ eventoSeleccionado.nombre }</td>
-			<td style="border: 2px solid black;">${ eventoSeleccionado.descripcion }</td>
-			<td style="border: 2px solid black;">${ eventoSeleccionado.direccion }</td>
-			<td style="border: 2px solid black;">${ eventoSeleccionado.fechaInicio }</td>
-			<td style="border: 2px solid black;">${ eventoSeleccionado.duracion }</td>
-			<td style="border: 2px solid black;">${ eventoSeleccionado.aforoMaximo }</td>
-			<td style="border: 2px solid black;">${ eventoSeleccionado.asistenciaMinima }</td>
+			<td>${ eventoSeleccionado.nombre }</td>
+			<td>${ eventoSeleccionado.descripcion }</td>
+			<td>${ eventoSeleccionado.direccion }</td>
+			<td>${ eventoSeleccionado.fechaInicio }</td>
+			<td>${ eventoSeleccionado.duracion }</td>
+			<td>${ eventoSeleccionado.aforoMaximo }</td>
+			<td>${ eventoSeleccionado.asistenciaMinima }</td>
 		</tr>
-	
 	</table>
+
+
+	<!-- Hago un formulario para hacer la reserva -->
 
 	<form method="post" action="/reservar/${ eventoSeleccionado.idEvento }">
 	
-		<p>Quédan: ${ eventoSeleccionado.aforoMaximo - cantidadReservas } entradas.</p>
 		<label for="cantidad">Cantidad (máximo 10):</label>
 		<input type="number" name="cantidad" placeholder="Cantidad a reservar"/>
 		<label for="observaciones">Observaciones:</label>
-		<textarea name="observaciones" placeholder="Observaciones..."></textarea>
+		<textarea name="observaciones" placeholder="Observaciones..." ></textarea>
 		<button type="submit"> Reservar </button>
 	
 	</form>
 
-	<img src="/img/boda.jpg" />
+	<p>Precio del evento: ${ eventoSeleccionado.precio } euros.</p>
 
+
+	<!-- Para indicar las entradas restantes, cojo el total de plazas y le resto las plazas reservadas -->	
+	
+	<p>Quédan: ${ eventoSeleccionado.aforoMaximo - cantidadReservas } entradas.</p>
+	
+	
+	<!-- Según el id del tipo de evento, muestro una imágen diferente -->
+	
+	<c:if test="${ iDtipo == 01 }"><img src="/img/concierto.jpg" /></c:if>
+	<c:if test="${ iDtipo == 02 }"><img src="/img/despedida.jpg" /></c:if>
+	<c:if test="${ iDtipo == 03 }"><img src="/img/cumpleanyos.jpg" /></c:if>
+	<c:if test="${ iDtipo == 04 }"><img src="/img/boda.jpg" /></c:if>
+
+
+	<p>Volver a <a href="/">inicio</a>.</p>
+	
 </body>
 </html>

@@ -6,19 +6,21 @@
 <meta charset="ISO-8859-1">
 <title>Registro</title>
 </head>
-<body style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100vh">
+<body>
 
-	<div style="height: 50vh; width: 75vw">
+
+	<!-- Si la sesión existe, muestro su nombre y indico que vuelva a inicio. -->
 	
-		<c:if test="${ sessionScope.userLogged != null }">
-		
-			<p>${sessionScope.userLogged.userName}, ya estás loggeado, <a href="/">volver a inicio</a></p>
-		
-		</c:if>
+	<c:if test="${ sessionScope.userLogged != null }">
+		<p>${sessionScope.userLogged.userName}, ya estás loggeado, <a href="/">volver a inicio</a></p>
+	</c:if>
 	
-		<c:if test="${ sessionScope.userLogged == null }">
-		
-		<form method="post" action="/registro/usuarioNuevo" style=" display: flex; flex-direction: column; align-items: center; justify-content: center;">
+	
+	<!-- Si no, le muestro los inputs para que cree un usuario nuevo. -->
+
+	<c:if test="${ sessionScope.userLogged == null }">
+
+		<form method="post" action="/registro/usuarioNuevo">
 			
 			<label for="userName"> Nombre de Usario: </label>
 			<input type="text" name="userName" placeholder="Nombre de Usario"/>
@@ -30,17 +32,19 @@
 			<input type="text" name="nombre" placeholder="Nombre"/>
 			<label for="direccion"> Dirección: </label>
 			<input type="text" name="direccion" placeholder="Dirección"/>
-
+	
 			<button style="width: 250px;">Registrarse</button>
 			
 		</form>
 		
-		<p>mensaje login:  ${mensajeLogin}</p>
-		<p>¿No tienes cuenta? <a href="#">Create una aquí</a></p>
+		<p>¿Ya tienes una cuenta? <a href="/login">Incia sesión aquí</a></p>
 		
-		</c:if>
 		
-	</div>
-
+		<!-- En caso de que se haya producido algún error, se lo muestro aquí -->
+		
+		<p> ${ mensajeRegistroNOT } </p>
+	
+	</c:if>
+		
 </body>
 </html>

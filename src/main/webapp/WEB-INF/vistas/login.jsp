@@ -6,39 +6,40 @@
 <meta charset="ISO-8859-1">
 <title>Login</title>
 </head>
-<body style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100vh">
+<body>
 
-	<div style="height: 50vh; width: 75vw">
 
-		<c:if test="${ sessionScope.userLogged != null }">
-	
-			<p>${sessionScope.userLogged.userName}, ya estás loggeado, <a href="/">volver a inicio</a></p>
-		
-		</c:if>
-		
-		<c:if test="${ sessionScope.userLogged == null }">
-		
-			<form method="get" action="/login/identificacion">
-				
-				<label for="userName">
-					Nombre de Usario:
-					<input type="text" name="userName" placeholder="Nombre de Usario"/>
-				</label>
-				<label for="password">
-					Contraseña:
-					<input type="password" name="password" placeholder="Contraseña"/>
-				</label>
-				<button>Iniciar Sesión</button>
-				
-			</form>
-			
-			<p>mensaje login:  ${mensajeLogin}</p>
-			<p>¿No tienes cuenta? <a href="/registro">Create una aquí</a></p>
-	
-		</c:if>
-		
-	</div>
-	
+	<!-- Si la sesión existe, muestro su nombre y indico que vuelva a inicio. -->
 
+	<c:if test="${ sessionScope.userLogged != null }">
+		<p>${sessionScope.userLogged.userName}, ya estás loggeado, <a href="/">volver a inicio</a></p>
+	</c:if>
+	
+	
+	<!-- Si no, le muestro los inputs para que me indique que usuario es. -->
+	
+	<c:if test="${ sessionScope.userLogged == null }">
+	
+		<form method="get" action="/login/identificacion">
+			<label for="userName">
+				Nombre de Usario:
+				<input type="text" name="userName" placeholder="Nombre de Usario"/>
+			</label>
+			<label for="password">
+				Contraseña:
+				<input type="password" name="password" placeholder="Contraseña"/>
+			</label>
+			<button>Iniciar Sesión</button>
+		</form>
+		
+		<p>¿No tienes cuenta? <a href="/registro">Create una aquí</a></p>
+		
+		
+		<!-- En caso de que el usuario o la contraseña no sean encontrados se lo muestro aquí -->
+		
+		<p>${mensajeLogin}</p>
+
+	</c:if>
+	
 </body>
 </html>

@@ -29,12 +29,16 @@ public class UsuariosGestion {
 	@GetMapping("/login")
 	public String mostrarPagina() {
 		
-		return "login";
+		return "login"; // Muestro la página login.jsp
 		
 	}
 	
 	@GetMapping("/login/identificacion")
 	public String identificacion(HttpSession sesion, Model model, @RequestParam( "userName" ) String userName, @RequestParam( "password" ) String password) {
+		
+		// Me guardo el suario según su userName.
+		// Si el userName y el password rescibidos del form existen, muestro la página de inicio, creando la sesión con el usuario y su id.
+		// Si no, muestro un mensaje de login incorrecto y nos mantenemos en login.jsp
 		
 		Usuarios usuarioSesion = usuario.buscarUno(userName);
 		
@@ -51,36 +55,46 @@ public class UsuariosGestion {
 	
 	@GetMapping("/registro")
 	public String registro() {
-		usuario.asignarID();
-		return "registro";
+		
+		return "registro"; // Muestro el contenido de registro.jsp
+		
 	}
 	
 	@PostMapping("/registro/usuarioNuevo")
 	public String altaUsuario( @RequestParam( "userName" ) String userName, @RequestParam( "password" ) String password, @RequestParam( "email" ) String email,
-							   @RequestParam( "nombre" ) String nombre, @RequestParam( "direccion" ) String direccion, HttpSession sesion) {
-		
-		Usuarios usuarioSesion = usuario.buscarUno(userName);
-		
+							   @RequestParam( "nombre" ) String nombre, @RequestParam( "direccion" ) String direccion, HttpSession sesion, Model model) {
+				
 		// Creo un usuario con los datos pasados.
 		Usuarios usuarioNuevo = new Usuarios( usuario.asignarID(), userName, password, email, nombre, direccion, 1, new Date() );
 		
 		// Lo añado a la lista de todos los usuarios.
-		usuario.crearUsuario(usuarioNuevo);
+		boolean usuarioCreado = usuario.crearUsuario(usuarioNuevo);
 		
-		// Creo la sesión.
-		sesion.setAttribute( "userLogged", usuarioSesion );
-		
-		 
-		return "index";
+		// Si se ha creado correctamente, creo la sesión con el usuario, cómo si hubiera iniciado sesión.
+		// Añado un mensaje para mostrar en la página de inicio.
+		// Si no, nos mantenemos en la misma página mostrando un mensaje de error.
+		if ( usuarioCreado ) {
+			
+			sesion.setAttribute( "userLogged", usuarioNuevo );
+			model.addAttribute("mensajeRegistroOK", "Te has registrado con éxito, Bienvenido");
+			return "index";
+			
+		} else {
+			
+			model.addAttribute("mensajeRegistroNOT", "Ha sucedido algún error, intentalo de nuevo");
+			return "registro";
+			
+		}
 		
 	}
 	
 	@GetMapping("/cerrar")
 	public String cerrarSesion(HttpSession sesion) {
 
+		// Elimino los atributos de sesión y redirijo a inicio.
 		sesion.removeAttribute( "userLogged" );
 		sesion.removeAttribute( "userLoggedId" );
-		return "index";
+		return "redirect:/login";
 		
 	}
 

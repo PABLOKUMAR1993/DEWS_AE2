@@ -18,7 +18,7 @@ public class Eventos implements Serializable {
 	private int duracion;
 	private String direccion;
 	private String estado;
-	private char destacado;
+	private String destacado;
 	private int aforoMaximo;
 	private int asistenciaMinima;
 	private double precio;
@@ -29,7 +29,7 @@ public class Eventos implements Serializable {
 	
 	
 	public Eventos(int idEvento, String nombre, String descripcion, Date fechaInicio, int duracion, String direccion,
-			String estado, char destacado, int aforoMaximo, int asistenciaMinima, double precio, Tipos tipo) {
+			String estado, String destacado, int aforoMaximo, int asistenciaMinima, double precio, Tipos tipo) {
 		super();
 		this.idEvento = idEvento;
 		this.nombre = nombre;
@@ -109,11 +109,11 @@ public class Eventos implements Serializable {
 		this.estado = estado;
 	}
 	
-	public char getDestacado() {
+	public String getDestacado() {
 		return destacado;
 	}
 	
-	public void setDestacado(char destacado) {
+	public void setDestacado(String destacado) {
 		this.destacado = destacado;
 	}
 	
