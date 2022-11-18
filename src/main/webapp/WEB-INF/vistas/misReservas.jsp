@@ -3,52 +3,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+	<meta charset="ISO-8859-1">
+	<link rel="stylesheet" type="text/css" href="/resources/style.css">
+	<title>Mis Reservas</title>
 </head>
 
 <body>
 	
-	<h1>Mis Reservas</h1>
+	<section class="contenedor">
 	
-	
-	<!-- Muestro un mensaje de si ha sido reservado o no -->
-	
-	<h3>${ mensajeReserva }</h3>
-	
-	
-	<!-- Si hay reservas, muestro la lista de reservas del usuario -->
-	
-	<c:if test="${ listadoReservas != [] }">
-		<table>
-		<tr>
-			<th>ID RESERVA</th>
-			<th>PRECIO EVENTO</th>
-			<th>OBSERVACIONES</th>
-			<th>CANTIDAD RESERVADA</th>
-		</tr>
-		<c:forEach var="reserva" items="${ listadoReservas }">
+		<h1>Mis Reservas</h1>
+		
+		
+		<!-- Si hay reservas, muestro la lista de reservas del usuario -->
+		
+		<c:if test="${ listadoReservas != [] }">
+			<table>
 			<tr>
-				<td>${ reserva.idReserva }</td>
-				<td>${ reserva.precioVeta }</td>
-				<td>${ reserva.observaciones }</td>
-				<td>${ reserva.cantidad }</td>
+				<th>ID RESERVA</th>
+				<th>PRECIO EVENTO</th>
+				<th>OBSERVACIONES</th>
+				<th>CANTIDAD RESERVADA</th>
 			</tr>
-		</c:forEach>
-		</table>
+			<c:forEach var="reserva" items="${ listadoReservas }">
+				<tr>
+					<td>${ reserva.idReserva }</td>
+					<td>${ reserva.precioVeta } euros.</td>
+					<td>${ reserva.observaciones }</td>
+					<td>${ reserva.cantidad }</td>
+				</tr>
+			</c:forEach>
+			</table>
+			
+			<p><a href="/">volver a inicio</a></p>
+			
+		</c:if>
 		
-		<p><a href="/">volver a inicio</a></p>
 		
-	</c:if>
-	
-	
-	<!-- Si no hay reservas, lo indico con un mensaje. -->
-	
-	<c:if test="${ listadoReservas == [] }">
-	
-		<p>No has realizado todavía ninguna reserva, <a href="/">volver a inicio</a></p>
-	
-	</c:if>
+		<!-- Si no hay reservas, lo indico con un mensaje. -->
+		
+		<c:if test="${ listadoReservas == [] }">
+		
+			<p>No has realizado todavía ninguna reserva, <a href="/">volver a inicio</a></p>
+		
+		</c:if>
+		
+		
+		<!-- Muestro un mensaje de si ha sido reservado o no -->
+		
+		<h3>${ mensajeReserva }</h3>
+
+	</section>
 
 </body>
 

@@ -3,48 +3,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Registro</title>
+	<meta charset="ISO-8859-1">
+	<link rel="stylesheet" type="text/css" href="/resources/style.css">
+	<title>Registro</title>
 </head>
 <body>
 
-
-	<!-- Si la sesión existe, muestro su nombre y indico que vuelva a inicio. -->
+	<section class="contenedor">
 	
-	<c:if test="${ sessionScope.userLogged != null }">
-		<p>${sessionScope.userLogged.userName}, ya estás loggeado, <a href="/">volver a inicio</a></p>
-	</c:if>
-	
-	
-	<!-- Si no, le muestro los inputs para que cree un usuario nuevo. -->
+		<h1>Registro</h1>
 
-	<c:if test="${ sessionScope.userLogged == null }">
-
-		<form method="post" action="/registro/usuarioNuevo">
+		<!-- Si la sesión existe, muestro su nombre y indico que vuelva a inicio. -->
+		
+		<c:if test="${ sessionScope.userLogged != null }">
+			<p>${sessionScope.userLogged.userName}, ya estás loggeado. <a href="/">Volver a inicio.</a></p>
+		</c:if>
+		
+		
+		<!-- Si no, le muestro los inputs para que cree un usuario nuevo. -->
+	
+		<c:if test="${ sessionScope.userLogged == null }">
+	
+			<form method="post" action="/registro/usuarioNuevo">
+				
+				<label for="userName"> Nombre de Usario: </label>
+				<input type="text" name="userName" placeholder="Nombre de Usario"/>
+				<label for="password"> Contraseña: </label>
+				<input type="password" name="password" placeholder="Contraseña"/>
+				<label for="email"> E-mail: </label>
+				<input type="text" name="email" placeholder="E-mail"/>
+				<label for="nombre"> Nombre: </label>
+				<input type="text" name="nombre" placeholder="Nombre"/>
+				<label for="direccion"> Dirección: </label>
+				<input type="text" name="direccion" placeholder="Dirección"/>
+		
+				<button style="width: 250px;">Registrarse</button>
+				
+			</form>
 			
-			<label for="userName"> Nombre de Usario: </label>
-			<input type="text" name="userName" placeholder="Nombre de Usario"/>
-			<label for="password"> Contraseña: </label>
-			<input type="password" name="password" placeholder="Contraseña"/>
-			<label for="email"> E-mail: </label>
-			<input type="text" name="email" placeholder="E-mail"/>
-			<label for="nombre"> Nombre: </label>
-			<input type="text" name="nombre" placeholder="Nombre"/>
-			<label for="direccion"> Dirección: </label>
-			<input type="text" name="direccion" placeholder="Dirección"/>
-	
-			<button style="width: 250px;">Registrarse</button>
+			<p>¿Ya tienes una cuenta? <a href="/login">Incia sesión aquí</a></p>
 			
-		</form>
+			
+			<!-- En caso de que se haya producido algún error, se lo muestro aquí -->
+			
+			<p> ${ mensajeRegistroNOT } </p>
 		
-		<p>¿Ya tienes una cuenta? <a href="/login">Incia sesión aquí</a></p>
-		
-		
-		<!-- En caso de que se haya producido algún error, se lo muestro aquí -->
-		
-		<p> ${ mensajeRegistroNOT } </p>
+		</c:if>
 	
-	</c:if>
+	</section>
 		
 </body>
 </html>

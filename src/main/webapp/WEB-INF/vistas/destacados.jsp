@@ -3,50 +3,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Eventos Destacados</title>
+	<meta charset="ISO-8859-1">
+	<link rel="stylesheet" type="text/css" href="/resources/style.css">
+	<title>Eventos Destacados</title>
 </head>
 <body>
 		
-		
-	<!-- Declaro una variable para utilizarla en el if -->
+	<section class="contenedor">
 	
-	<c:set value="s" var="destacado" />
-		
-	<h2>Eventos Destacados</h2>
-		
-		
-	<!-- Creo la tabla para mostrar los eventos -->
 	
-	<table>
-		<thead>
-			<tr>
-				<th>NOMBRE</th>
-				<th>AFORO</th>
-				<th>FECHA INICIO</th>
-				<th>OPCIONES</th>
-			</tr>
-		</thead>
+		<!-- Declaro una variable para utilizarla en el if -->
 		
+		<c:set value="s" var="destacado" />
+			
+		<h2>Eventos Destacados</h2>
+			
+			
+		<!-- Creo la tabla para mostrar los eventos -->
 		
-		<!-- Muestro un listado de todos los eventos. Si el evento está "destacado" lo muestro -->
+		<table>
+			<thead>
+				<tr>
+					<th>NOMBRE</th>
+					<th>AFORO</th>
+					<th>FECHA INICIO</th>
+					<th>OPCIONES</th>
+				</tr>
+			</thead>
+			
+			
+			<!-- Muestro un listado de todos los eventos. Si el evento está "destacado" lo muestro -->
+			
+			<tbody>
+				<c:forEach var="evento" items="${ listaEventos }">
+					<c:if test="${ evento.destacado == destacado }">
+						<tr>
+							<td>${ evento.nombre }</td>
+							<td>${ evento.aforoMaximo }</td>
+							<td>${ evento.fechaInicio }</td>
+							<td><a href="/detalle/${ evento.idEvento }">Detalle</a></td>
+						</tr>
+					</c:if>
+				</c:forEach>
+			</tbody>
+			
+		</table>
 		
-		<tbody>
-			<c:forEach var="evento" items="${ listaEventos }">
-				<c:if test="${ evento.destacado == destacado }">
-					<tr>
-						<td>${ evento.nombre }</td>
-						<td>${ evento.aforoMaximo }</td>
-						<td>${ evento.fechaInicio }</td>
-						<td><a href="/detalle/${ evento.idEvento }">Detalle</a></td>
-					</tr>
-				</c:if>
-			</c:forEach>
-		</tbody>
-		
-	</table>
+		<p>Volver a <a href="/">inicio</a>.</p>
 	
-	<p>Volver a <a href="/">inicio</a>.</p>
+	</section>
 	
 </body>
 </html>

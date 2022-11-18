@@ -3,11 +3,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Eventos Activos</title>
+	<meta charset="ISO-8859-1">
+	<link rel="stylesheet" type="text/css" href="/resources/style.css">
+	<title>Eventos Activos</title>
 </head>
 <body>
 
+	<section class="contenedor">
 
 	<!-- Declaro una variable para utilizarla en el if -->
 	
@@ -47,6 +49,8 @@
 	</table>
 	
 	<p>Volver a <a href="/">inicio</a>.</p>
+	
+	</section>
 	
 </body>
 </html>

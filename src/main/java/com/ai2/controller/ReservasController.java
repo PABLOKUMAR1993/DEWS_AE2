@@ -58,7 +58,7 @@ public class ReservasController {
 
 		// Según si la reserva se ha creado o no, paso un mensaje u otro mediante redirect a reservas.jsp.
 		
-		if ( reservaCreada )redir.addFlashAttribute("mensajeReserva", "Evento reservador con éxito" );
+		if ( reservaCreada )redir.addFlashAttribute("mensajeReserva", "Evento reservado con éxito" );
 		else redir.addFlashAttribute( "mensajeReserva", "Ha habido un error al procesar tu reserva" );	
 		
 		return "redirect:/reservas";

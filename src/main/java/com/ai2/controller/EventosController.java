@@ -65,8 +65,7 @@ public class EventosController {
 		// Le paso a detalle.jsp el evento indicado en el id,
 		// la cantidad de reservas que se han hecho y
 		// el id del tipo de evento.
-		
-		System.out.println( evento.buscarUno(idEvento) );
+
 		model.addAttribute( "eventoSeleccionado", evento.buscarUno(idEvento) );
 		model.addAttribute( "cantidadReservas", reserva.totalReservas() );
 		model.addAttribute("iDtipo", idTipo);

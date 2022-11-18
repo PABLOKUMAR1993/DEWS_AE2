@@ -1,1 +1,109 @@
 @charset "ISO-8859-1";
+
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.contenedor {
+	display: flex;
+	flex-direction: column;
+	height: 50vh;
+	width: 75vw;
+	text-align: center;
+	align-items: center;
+}
+
+.logo {
+	width: 75px;
+	object-fit: contain;
+}
+
+nav {
+	display: flex;
+	justify-content: space-around;
+	font-size: 1em;
+	font-family: roboto;
+}
+
+li {
+	display: flex;
+}
+
+h1 {
+	font-size: 2em;
+	font-family: roboto;
+}
+
+h2 {
+	font-size: 1.8em;
+	font-family: roboto;
+}
+
+h3, legend {
+	font-size: 1.6em;
+	font-family: roboto;
+}
+
+fieldset {
+	margin-top: 25px;
+	padding: 25px 50px 25px 50px;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+label {
+	display: flex;
+	flex-direction: column;
+	font-size: 1.5em;
+	font-family: roboto;
+}
+
+input, textarea {
+	width: 300px;
+	height: 35px;
+	padding: 0 0 0 10px;
+	margin: 10px 0 10px 0;
+	border: none;
+	border-bottom: 2px solid black;
+	font-size: 0.75em;
+	font-family: roboto;
+}
+
+textarea {
+	height: 60px;
+}
+
+button {
+	width: 150px;
+	height: 30px;
+	margin: 10px 0 10px 0;
+	font-size: 1em;
+	font-family: roboto;
+}
+
+p {
+	font-size: 1em;
+	font-family: roboto;
+}
+
+th {
+	font-size: 1.2em;
+	font-family: roboto;
+}
+
+td {
+	font-size: 1em;
+	font-family: roboto;
+}
+
+.imgDetalle {
+	width: 25vw;
+}
